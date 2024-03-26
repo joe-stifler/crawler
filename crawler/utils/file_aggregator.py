@@ -34,8 +34,7 @@ def get_directory_structure(startpath):
         dirs[:] = [
             d
             for d in dirs
-            if os.path.join(root, d)
-            not in [os.path.join(startpath, f) for f in ignored_folders]
+            if os.path.join(root, d) not in [os.path.join(startpath, f) for f in ignored_folders]
         ]  # Modify dirs in-place to ignore certain directories
         level = root.replace(startpath, "").count(os.sep)
         indent = " " * 4 * (level)
@@ -56,12 +55,8 @@ with tempfile.NamedTemporaryFile(delete=False) as temp_outfile:
         outfile.write("Aggregated File Content:\n")
         # Then write the file contents as before
         for pattern in patterns:
-            for filename in glob.glob(
-                os.path.join(start_path, "**", pattern), recursive=True
-            ):
-                if any(
-                    ignored_folder in filename for ignored_folder in ignored_folders
-                ):
+            for filename in glob.glob(os.path.join(start_path, "**", pattern), recursive=True):
+                if any(ignored_folder in filename for ignored_folder in ignored_folders):
                     continue
                 relative_path = os.path.relpath(filename, start_path_abs)
                 outfile.write(

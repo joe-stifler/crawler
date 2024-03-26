@@ -10,8 +10,7 @@ from ..utils.file_utils import (
 
 
 class BaseGraph:
-    """A base class for managing and visualizing graphs using NetworkX and
-    matplotlib.
+    """A base class for managing and visualizing graphs using NetworkX and matplotlib.
 
     This class encapsulates a directed graph and provides methods for node and edge manipulation,
     visualization, and exporting the graph data.
@@ -56,8 +55,7 @@ class BaseGraph:
         self.graph.add_node(node.id, node=node)
 
     def add_edge(self, u, v, **attributes):
-        """Adds an edge between two nodes in the graph, with optional
-        attributes.
+        """Adds an edge between two nodes in the graph, with optional attributes.
 
         Parameters
         ----------
@@ -115,8 +113,8 @@ class BaseGraph:
     def visualize(self):
         """Visualizes the graph using matplotlib.
 
-        This method generates a visual representation of the graph, displaying
-        nodes, edges, and optionally labels.
+        This method generates a visual representation of the graph, displaying nodes, edges, and
+        optionally labels.
         """
         # Prepare node labels based on WebNode IDs
         node_labels = {node.id: f"{idx}" for idx, node in enumerate(self.all_nodes())}
@@ -139,9 +137,7 @@ class BaseGraph:
         )
 
         # Prepare and show the URL mapping on the right
-        textstr = "\n".join(
-            [f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())]
-        )
+        textstr = "\n".join([f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())])
         props = dict(boxstyle="round", facecolor="wheat", alpha=0.5)
 
         # Add a side subplot for URL mapping
@@ -176,8 +172,8 @@ class BaseGraph:
         return url_text_dict
 
     def save_to_multiple_files(self, directory="output"):
-        """Saves the graph nodes' markdown representations to multiple files in
-        the specified directory.
+        """Saves the graph nodes' markdown representations to multiple files in the specified
+        directory.
 
         Parameters
         ----------
@@ -188,8 +184,7 @@ class BaseGraph:
         save_content_to_multiple_files(url_text_dict, directory)
 
     def save_to_single_file(self, directory="output", filename="combined_output.md"):
-        """Combines the markdown representations of all graph nodes and saves
-        them to a single file.
+        """Combines the markdown representations of all graph nodes and saves them to a single file.
 
         Parameters
         ----------

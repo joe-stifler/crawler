@@ -2,8 +2,7 @@ from ..base.base_node import BaseEdge
 
 
 class WebEdge(BaseEdge):
-    """Represents a hyperlink (edge) between two web page nodes (u and v) in the
-    crawl graph.
+    """Represents a hyperlink (edge) between two web page nodes (u and v) in the crawl graph.
 
     This class extends `BaseEdge` to encapsulate attributes specific to hyperlinks found during web crawling, such as
     the relationship between pages, the anchor text, and any other relevant HTML attributes of the link.
@@ -37,8 +36,7 @@ class WebEdge(BaseEdge):
     """
 
     def __init__(self, u, v, **attributes):
-        """Initializes a `WebEdge` instance representing a hyperlink between two
-        web page nodes.
+        """Initializes a `WebEdge` instance representing a hyperlink between two web page nodes.
 
         Parameters
         ----------
