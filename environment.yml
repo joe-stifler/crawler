@@ -1,0 +1,10 @@
+name: crawler
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+    - jupyter
+    - ipykernel
+    - -r requirements.txt

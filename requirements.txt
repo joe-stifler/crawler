@@ -1,0 +1,11 @@
+jupyter
+ipykernel
+pickleshare
+matplotlib
+numpy
+keras-nlp
+keras>=3
+jax[cuda12_pip]
+tensorrt
+networkx
+html2text
