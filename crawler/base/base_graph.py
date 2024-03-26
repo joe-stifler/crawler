@@ -123,7 +123,46 @@ class BaseGraph:
 
         This method generates a visual representation of the graph, displaying nodes, edges, and optionally labels.
         """
-        # Visualization implementation remains the same
+        # Prepare node labels based on WebNode IDs
+        node_labels = {node.id: f"{idx}" for idx, node in enumerate(self.all_nodes())}
+
+        # Set up the figure layout
+        fig, ax = plt.subplots(figsize=(15, 8))
+        plt.subplots_adjust(left=0.1, right=0.75)
+        ax_graph = plt.subplot(121)
+
+        # Draw the graph
+        pos = nx.spring_layout(self.graph)  # positions for all nodes
+        nx.draw(
+            self.graph,
+            pos,
+            with_labels=True,
+            labels=node_labels,
+            node_size=50,
+            font_size=8,
+            ax=ax_graph,
+        )
+
+        # Prepare and show the URL mapping on the right
+        textstr = "\n".join(
+            [f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())]
+        )
+        props = dict(boxstyle="round", facecolor="wheat", alpha=0.5)
+
+        # Add a side subplot for URL mapping
+        ax_mapping = plt.subplot(122)
+        plt.axis("off")
+        ax_mapping.text(
+            0.05,
+            0.95,
+            textstr,
+            transform=ax_mapping.transAxes,
+            fontsize=8,
+            verticalalignment="top",
+            bbox=props,
+        )
+
+        plt.show()
 
     def to_markdown(self):
         """
@@ -135,7 +174,12 @@ class BaseGraph:
             A dictionary where keys are URLs (assuming each node has a URL attribute) and values are the markdown
             representation of nodes.
         """
-        # Method implementation remains the same
+        url_text_dict = {}
+        for node in self.all_nodes():
+            url_text_dict[
+                node.url
+            ] = node.to_markdown()  # Assuming each node has a 'to_markdown' method
+        return url_text_dict
 
     def save_to_multiple_files(self, directory="output"):
         """
@@ -146,7 +190,8 @@ class BaseGraph:
         directory : str, optional
             The directory where the files will be saved. Default is "output".
         """
-        # Method implementation remains the same
+        url_text_dict = self.to_markdown()
+        save_content_to_multiple_files(url_text_dict, directory)
 
     def save_to_single_file(self, directory="output", filename="combined_output.md"):
         """
@@ -159,4 +204,5 @@ class BaseGraph:
         filename : str, optional
             The name of the output file. Default is "combined_output.md".
         """
-        # Method implementation remains the same
+        url_text_dict = self.to_markdown()
+        save_content_to_single_file(url_text_dict, directory, filename)
