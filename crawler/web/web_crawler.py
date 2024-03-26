@@ -72,7 +72,10 @@ class WebCrawler(BaseCrawler):
         """
         return WebNode(node_id)
 
-    def start_new_crawling_session(self, start_node_id, restrict_to_domain=True):
+    def start_new_crawling_session(
+            self,
+            start_node_id,
+            restrict_to_domain=True):
         """
         Initializes a new crawling session, with an option to restrict the session to the domain of the start node.
 

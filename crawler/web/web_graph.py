@@ -89,6 +89,7 @@ class WebGraph(BaseGraph):
             An HTML string representing the graph's nodes and their attributes.
         """
         nodes_html = "<hr>".join(
-            node._repr_html_(index=index) for index, node in enumerate(self.all_nodes())
-        )
+            node._repr_html_(
+                index=index) for index, node in enumerate(
+                self.all_nodes()))
         return f"<div style='border: 1px solid #eee; padding: 10px;'>{nodes_html}</div>"

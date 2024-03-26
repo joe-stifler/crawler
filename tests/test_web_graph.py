@@ -2,11 +2,13 @@ import pytest
 from crawler.web.web_node import WebNode
 from crawler.web.web_graph import WebGraph
 
+
 def test_add_node_to_web_graph():
     graph = WebGraph()
     node = WebNode("https://example.com")
     graph.add_node(node)
     assert node in graph
+
 
 def test_add_edge_to_web_graph():
     graph = WebGraph()

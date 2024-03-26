@@ -2,7 +2,8 @@ import os
 import networkx as nx
 import matplotlib.pyplot as plt
 
-# Assuming save_content_to_multiple_files and save_content_to_single_file are defined elsewhere
+# Assuming save_content_to_multiple_files and save_content_to_single_file
+# are defined elsewhere
 from ..utils.file_utils import (
     save_content_to_multiple_files,
     save_content_to_single_file,
@@ -125,7 +126,10 @@ class BaseGraph:
         This method generates a visual representation of the graph, displaying nodes, edges, and optionally labels.
         """
         # Prepare node labels based on WebNode IDs
-        node_labels = {node.id: f"{idx}" for idx, node in enumerate(self.all_nodes())}
+        node_labels = {
+            node.id: f"{idx}" for idx,
+            node in enumerate(
+                self.all_nodes())}
 
         # Set up the figure layout
         fig, ax = plt.subplots(figsize=(15, 8))
@@ -194,7 +198,10 @@ class BaseGraph:
         url_text_dict = self.to_markdown()
         save_content_to_multiple_files(url_text_dict, directory)
 
-    def save_to_single_file(self, directory="output", filename="combined_output.md"):
+    def save_to_single_file(
+            self,
+            directory="output",
+            filename="combined_output.md"):
         """
         Combines the markdown representations of all graph nodes and saves them to a single file.
 

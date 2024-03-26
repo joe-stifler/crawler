@@ -22,7 +22,8 @@ ignored_folders = [
     "transformed_images",
 ]
 
-# Get the absolute path of the start_path to ensure correct relative path calculation
+# Get the absolute path of the start_path to ensure correct relative path
+# calculation
 start_path_abs = os.path.abspath(start_path)
 
 
@@ -59,8 +60,7 @@ with tempfile.NamedTemporaryFile(delete=False) as temp_outfile:
                 os.path.join(start_path, "**", pattern), recursive=True
             ):
                 if any(
-                    ignored_folder in filename for ignored_folder in ignored_folders
-                ):
+                        ignored_folder in filename for ignored_folder in ignored_folders):
                     continue
                 relative_path = os.path.relpath(filename, start_path_abs)
                 outfile.write(

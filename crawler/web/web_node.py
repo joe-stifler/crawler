@@ -236,8 +236,7 @@ class WebNode(BaseNode):
             f"<strong>Parent:</strong> {self.parent.id if self.parent else None}<br>"
             f"<strong>Domain:</strong> {self.domain}<br>"
             f"<strong>URL:</strong> {self.id}"
-            f"</div>"
-        )
+            f"</div>")
 
     def to_markdown(self):
         """
