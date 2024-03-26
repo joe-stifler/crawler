@@ -9,3 +9,4 @@ jax[cuda12_pip]
 tensorrt
 networkx
 html2text
+pytest===7.4.3
