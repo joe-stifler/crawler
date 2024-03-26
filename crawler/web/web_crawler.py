@@ -72,10 +72,7 @@ class WebCrawler(BaseCrawler):
         """
         return WebNode(node_id)
 
-    def start_new_crawling_session(
-            self,
-            start_node_id,
-            restrict_to_domain=True):
+    def start_new_crawling_session(self, start_node_id, restrict_to_domain=True):
         """
         Initializes a new crawling session, with an option to restrict the session to the domain of the start node.
 
@@ -115,9 +112,7 @@ class WebCrawler(BaseCrawler):
             True if the URL is within the allowed domains, False otherwise.
         """
         all_allowed_domains = self.base_allowed_domains + self.session_allowed_domains
-        return len(all_allowed_domains) == 0 or any(
-            domain in url for domain in all_allowed_domains
-        )
+        return len(all_allowed_domains) == 0 or any(domain in url for domain in all_allowed_domains)
 
     def visit_node_neighborhood(self, node):
         """
@@ -135,8 +130,6 @@ class WebCrawler(BaseCrawler):
         """
         node_neighbors = node.fetch_connected_hyperlinks()
         allowed_neighbors = [
-            WebNode(neighbor)
-            for neighbor in node_neighbors
-            if self.in_allowed_domain(neighbor)
+            WebNode(neighbor) for neighbor in node_neighbors if self.in_allowed_domain(neighbor)
         ]
         return allowed_neighbors

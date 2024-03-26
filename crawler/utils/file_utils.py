@@ -59,9 +59,7 @@ def save_content_to_multiple_files(url_text_dict, directory="output"):
             file.write(content)
 
 
-def save_content_to_single_file(
-    url_text_dict, directory="output", filename="combined_output.md"
-):
+def save_content_to_single_file(url_text_dict, directory="output", filename="combined_output.md"):
     """
     Saves content of all URLs into a single Markdown file within the specified directory.
 

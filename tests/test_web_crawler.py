@@ -9,9 +9,7 @@ from pytest import fixture, raises
 # Fixtures for reusable objects
 @fixture(scope="module")
 def crawler():
-    return WebCrawler(
-        allowed_domains=["example.com"]
-    )  # Adjust allowed_domains as needed
+    return WebCrawler(allowed_domains=["example.com"])  # Adjust allowed_domains as needed
 
 
 @fixture
@@ -72,8 +70,8 @@ def test_web_node_soup(web_node):
 def test_fetch_connected_hyperlinks(web_node):
     # Mock or provide actual HTML content for testing
     web_node._soup = BeautifulSoup(
-        """<a href="/link1">Link 1</a> <a href="/link2">Link 2</a>""",
-        "html.parser")
+        """<a href="/link1">Link 1</a> <a href="/link2">Link 2</a>""", "html.parser"
+    )
     links = web_node.fetch_connected_hyperlinks()
     assert links == ["https://example.com/link1", "https://example.com/link2"]
 

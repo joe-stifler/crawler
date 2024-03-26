@@ -126,10 +126,7 @@ class BaseGraph:
         This method generates a visual representation of the graph, displaying nodes, edges, and optionally labels.
         """
         # Prepare node labels based on WebNode IDs
-        node_labels = {
-            node.id: f"{idx}" for idx,
-            node in enumerate(
-                self.all_nodes())}
+        node_labels = {node.id: f"{idx}" for idx, node in enumerate(self.all_nodes())}
 
         # Set up the figure layout
         fig, ax = plt.subplots(figsize=(15, 8))
@@ -149,9 +146,7 @@ class BaseGraph:
         )
 
         # Prepare and show the URL mapping on the right
-        textstr = "\n".join(
-            [f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())]
-        )
+        textstr = "\n".join([f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())])
         props = dict(boxstyle="round", facecolor="wheat", alpha=0.5)
 
         # Add a side subplot for URL mapping
@@ -198,10 +193,7 @@ class BaseGraph:
         url_text_dict = self.to_markdown()
         save_content_to_multiple_files(url_text_dict, directory)
 
-    def save_to_single_file(
-            self,
-            directory="output",
-            filename="combined_output.md"):
+    def save_to_single_file(self, directory="output", filename="combined_output.md"):
         """
         Combines the markdown representations of all graph nodes and saves them to a single file.
 

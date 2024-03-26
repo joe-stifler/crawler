@@ -117,7 +117,6 @@ class BaseCrawler(ABC):
                     crawl_subgraph.add_node(child_node)
                     visiting_nodes.append((child_node, new_depth))
 
-                crawl_subgraph.add_edge(
-                    current_node, child_node, depth=new_depth)
+                crawl_subgraph.add_edge(current_node, child_node, depth=new_depth)
 
         return crawl_subgraph

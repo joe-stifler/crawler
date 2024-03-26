@@ -8,14 +8,10 @@ def main():
     parser = argparse.ArgumentParser(
         description="Web Crawler for generating Markdown from web pages"
     )
+    parser.add_argument("url", type=str, help="The starting URL for the web crawl")
     parser.add_argument(
-        "url",
-        type=str,
-        help="The starting URL for the web crawl")
-    parser.add_argument(
-        "output_folder",
-        type=str,
-        help="The folder where Markdown files will be saved")
+        "output_folder", type=str, help="The folder where Markdown files will be saved"
+    )
     parser.add_argument(
         "--merge",
         action="store_true",
@@ -33,9 +29,7 @@ def main():
 
     # Initialize WebCrawler with a list of allowed domains derived from the
     # input URL, if necessary
-    crawler = WebCrawler(
-        allowed_domains=[args.url]
-    )  # Adjust allowed_domains as necessary
+    crawler = WebCrawler(allowed_domains=[args.url])  # Adjust allowed_domains as necessary
 
     # Start the crawling session with the specified max_depth
     # This part assumes the WebCrawler's interface supports a max_depth
@@ -47,9 +41,7 @@ def main():
         # Example function to save a single Markdown file
         # You will need to implement this logic according to your project
         # structure
-        crawled_data.save_to_single_file(
-            directory=args.output_folder, filename="merged_output.md"
-        )
+        crawled_data.save_to_single_file(directory=args.output_folder, filename="merged_output.md")
     else:
         # Example function to save multiple Markdown files
         # Implementation specifics depend on your project's classes and methods

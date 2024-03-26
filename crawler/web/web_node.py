@@ -155,9 +155,7 @@ class WebNode(BaseNode):
             return ""
 
         h = html2text.HTML2Text()
-        h.ignore_links = (
-            True  # Optionally, links can be included by setting this to False
-        )
+        h.ignore_links = True  # Optionally, links can be included by setting this to False
         return h.handle(self.soup.prettify())
 
     @property
@@ -236,7 +234,8 @@ class WebNode(BaseNode):
             f"<strong>Parent:</strong> {self.parent.id if self.parent else None}<br>"
             f"<strong>Domain:</strong> {self.domain}<br>"
             f"<strong>URL:</strong> {self.id}"
-            f"</div>")
+            f"</div>"
+        )
 
     def to_markdown(self):
         """
