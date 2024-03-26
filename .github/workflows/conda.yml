@@ -1,0 +1,29 @@
+name: Conda
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  conda-check:
+    name: Check Conda environment
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: pietstormai
+          environment-file: environment.yml
+      - run: |
+          pip install --upgrade pip
+          pip install -e .
+          pip install -r requirements.txt
+      - run: |
+          conda info --envs
+      - run: |
+          python3 --version
+      - run: |
+          python3 -m pytest
