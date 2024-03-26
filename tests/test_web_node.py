@@ -1,4 +1,3 @@
-import pytest
 from crawler.web.web_node import WebNode
 
 

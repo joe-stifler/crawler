@@ -56,8 +56,8 @@ class BaseNode(ABC):
     def to_markdown(self):
         """Converts the node's content to Markdown format.
 
-        This method should be implemented by subclasses to specify how the node's information should
-        be represented in Markdown.
+        This method should be implemented by subclasses to specify how the
+        node's information should be represented in Markdown.
         """
         pass
 
@@ -72,7 +72,8 @@ class BaseNode(ABC):
         return hash(self.id)
 
     def __eq__(self, other):
-        """Checks whether this node is equal to another node, based on their identifiers.
+        """Checks whether this node is equal to another node, based on their
+        identifiers.
 
         Parameters
         ----------

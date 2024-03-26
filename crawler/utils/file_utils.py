@@ -32,7 +32,8 @@ def generate_filename_from_url(url):
 
 
 def save_content_to_multiple_files(url_text_dict, directory="output"):
-    """Saves content of each URL to its own Markdown file within the specified directory.
+    """Saves content of each URL to its own Markdown file within the specified
+    directory.
 
     Each URL's content is saved in a separate Markdown file named after the URL itself. The function
     ensures the creation of the target directory if it does not already exist.
@@ -60,7 +61,8 @@ def save_content_to_multiple_files(url_text_dict, directory="output"):
 def save_content_to_single_file(
     url_text_dict, directory="output", filename="combined_output.md"
 ):
-    """Saves content of all URLs into a single Markdown file within the specified directory.
+    """Saves content of all URLs into a single Markdown file within the
+    specified directory.
 
     Content from each URL is saved consecutively in the same file, separated by Markdown horizontal rules.
     The function ensures the creation of the target directory if it does not already exist.

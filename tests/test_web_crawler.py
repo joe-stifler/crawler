@@ -1,9 +1,9 @@
-from crawler import *
+from crawl.web.web_crawler import WebCrawler
 from crawler.web.web_node import WebNode
 from crawler.web.web_graph import WebGraph
 from bs4 import BeautifulSoup
 
-from pytest import fixture, raises
+from pytest import fixture
 
 
 # Fixtures for reusable objects

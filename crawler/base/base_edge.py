@@ -24,7 +24,8 @@ class BaseEdge(ABC):
 
     @abstractmethod
     def __init__(self, u, v, **attributes):
-        """Initializes the BaseEdge instance with source, target, and additional attributes.
+        """Initializes the BaseEdge instance with source, target, and additional
+        attributes.
 
         Parameters
         ----------

@@ -7,8 +7,9 @@ from ..base.base_node import BaseNode
 
 
 class WebNode(BaseNode):
-    """Represents a node in the web graph, corresponding to a web page. It supports lazily fetching
-    HTML content, parsing it, extracting hyperlinks, and converting the content to Markdown.
+    """Represents a node in the web graph, corresponding to a web page. It
+    supports lazily fetching HTML content, parsing it, extracting hyperlinks,
+    and converting the content to Markdown.
 
     Parameters
     ----------
@@ -71,7 +72,8 @@ class WebNode(BaseNode):
         self._content_fetched = False
 
     def _fetch_and_parse_html(self):
-        """Lazily fetches the HTML content of the node's URL and parses it using BeautifulSoup.
+        """Lazily fetches the HTML content of the node's URL and parses it using
+        BeautifulSoup.
 
         This method is intended to be called internally and ensures that the web page content is fetched and parsed
         only once, when first accessed. If the fetch operation is successful, the content is stored in a BeautifulSoup
@@ -96,9 +98,10 @@ class WebNode(BaseNode):
 
     @property
     def soup(self):
-        """A property that ensures the HTML content is fetched and parsed upon first access. It
-        returns a BeautifulSoup object containing the parsed HTML of the web page. This allows for
-        lazy loading of web page content, minimizing unnecessary network operations.
+        """A property that ensures the HTML content is fetched and parsed upon
+        first access. It returns a BeautifulSoup object containing the parsed
+        HTML of the web page. This allows for lazy loading of web page content,
+        minimizing unnecessary network operations.
 
         Returns
         -------
@@ -111,8 +114,9 @@ class WebNode(BaseNode):
         return self._soup
 
     def fetch_connected_hyperlinks(self):
-        """Extracts and returns all hyperlinks found within the web page's HTML content. It parses
-        the `a` tags to extract the `href` attribute values, resolving them to absolute URLs.
+        """Extracts and returns all hyperlinks found within the web page's HTML
+        content. It parses the `a` tags to extract the `href` attribute values,
+        resolving them to absolute URLs.
 
         Returns
         -------
@@ -135,9 +139,10 @@ class WebNode(BaseNode):
         return urls
 
     def convert_to_markdown(self):
-        """Converts the web page's HTML content to Markdown format using the html2text library. This
-        method allows for a text representation of the web page's content, which can be particularly
-        useful for documentation or note-taking applications.
+        """Converts the web page's HTML content to Markdown format using the
+        html2text library. This method allows for a text representation of the
+        web page's content, which can be particularly useful for documentation
+        or note-taking applications.
 
         Returns
         -------
@@ -156,8 +161,9 @@ class WebNode(BaseNode):
 
     @property
     def url(self):
-        """A property returning the URL of the web page this node represents. It provides direct
-        access to the node's identifier, which in the context of a `WebNode`, is the URL.
+        """A property returning the URL of the web page this node represents. It
+        provides direct access to the node's identifier, which in the context of
+        a `WebNode`, is the URL.
 
         Returns
         -------
@@ -168,9 +174,9 @@ class WebNode(BaseNode):
 
     @property
     def domain(self):
-        """Extracts and returns the domain part of the web page's URL, facilitating operations that
-        require domain-level granularity, such as restricting crawling activities to specific
-        domains.
+        """Extracts and returns the domain part of the web page's URL,
+        facilitating operations that require domain-level granularity, such as
+        restricting crawling activities to specific domains.
 
         Returns
         -------
@@ -181,8 +187,8 @@ class WebNode(BaseNode):
         return parsed_url.netloc
 
     def __str__(self):
-        """Provides a human-readable string representation of the WebNode, primarily for debugging
-        and logging purposes.
+        """Provides a human-readable string representation of the WebNode,
+        primarily for debugging and logging purposes.
 
         Returns
         -------
@@ -192,8 +198,8 @@ class WebNode(BaseNode):
         return f"WebNode(id={self.id})"
 
     def __repr__(self):
-        """Provides a detailed string representation of the WebNode, suitable for interactive use in
-        the interpreter.
+        """Provides a detailed string representation of the WebNode, suitable
+        for interactive use in the interpreter.
 
         Returns
         -------
@@ -203,9 +209,10 @@ class WebNode(BaseNode):
         return f"WebNode(id={self.id})"
 
     def _repr_html_(self, index=None):
-        """Generates an HTML representation of the WebNode for display in Jupyter notebooks or web
-        interfaces , incorporating additional metadata such as the node's index, depth, parent, and
-        domain for enhanced visualization.
+        """Generates an HTML representation of the WebNode for display in
+        Jupyter notebooks or web interfaces , incorporating additional metadata
+        such as the node's index, depth, parent, and domain for enhanced
+        visualization.
 
         Parameters
         ----------
@@ -233,10 +240,11 @@ class WebNode(BaseNode):
         )
 
     def to_markdown(self):
-        """Converts the node's content, specifically the web page's HTML content, to Markdown
-        format. This method leverages the `convert_to_markdown` method to produce a Markdown
-        representation of the HTML content, facilitating its use in documentation, notes, or any
-        other context where Markdown is preferred.
+        """Converts the node's content, specifically the web page's HTML
+        content, to Markdown format. This method leverages the
+        `convert_to_markdown` method to produce a Markdown representation of the
+        HTML content, facilitating its use in documentation, notes, or any other
+        context where Markdown is preferred.
 
         Returns
         -------

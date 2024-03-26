@@ -1,12 +1,9 @@
-import networkx as nx
-
-from .web_node import WebNode
 from ..base.base_graph import BaseGraph
 
 
 class WebGraph(BaseGraph):
-    """Represents a directed graph of web pages for web crawling, extending the BaseGraph with web-
-    specific functionalities.
+    """Represents a directed graph of web pages for web crawling, extending the
+    BaseGraph with web- specific functionalities.
 
     This class is designed to manage a collection of `WebNode` instances that represent individual web pages, allowing
     for the organization, traversal, and analysis of a web graph. It provides enhanced visualization methods suited for
@@ -41,11 +38,13 @@ class WebGraph(BaseGraph):
     """
 
     def __init__(self):
-        """Initializes a new WebGraph instance, ready for adding web nodes and edges."""
+        """Initializes a new WebGraph instance, ready for adding web nodes and
+        edges."""
         super().__init__()
 
     def __repr__(self):
-        """Returns a compact representation of the WebGraph, indicating the number of nodes.
+        """Returns a compact representation of the WebGraph, indicating the
+        number of nodes.
 
         Returns
         -------

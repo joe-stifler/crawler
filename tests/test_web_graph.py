@@ -1,4 +1,3 @@
-import pytest
 from crawler.web.web_node import WebNode
 from crawler.web.web_graph import WebGraph
 
