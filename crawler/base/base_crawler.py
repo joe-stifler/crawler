@@ -3,8 +3,7 @@ from abc import ABC, abstractmethod
 
 
 class BaseCrawler(ABC):
-    """
-    Abstract base class for crawl graphs.
+    """Abstract base class for crawl graphs.
 
     This class defines the interface for crawling operations within a graph structure. It includes methods for
     retrieving nodes, starting new crawling sessions, visiting neighboring nodes, and performing a crawl using
@@ -23,15 +22,12 @@ class BaseCrawler(ABC):
     """
 
     def __init__(self):
-        """
-        Initializes the BaseCrawler instance.
-        """
+        """Initializes the BaseCrawler instance."""
         super().__init__()
 
     @abstractmethod
     def get_node(self, node_id):
-        """
-        Retrieves a node from the graph.
+        """Retrieves a node from the graph.
 
         Parameters
         ----------
@@ -47,8 +43,7 @@ class BaseCrawler(ABC):
 
     @abstractmethod
     def start_new_crawling_session(self, start_node_id):
-        """
-        Starts a new crawling session from a given node.
+        """Starts a new crawling session from a given node.
 
         Parameters
         ----------
@@ -64,8 +59,7 @@ class BaseCrawler(ABC):
 
     @abstractmethod
     def visit_node_neighborhood(self, node):
-        """
-        Retrieves the neighborhood of a given node.
+        """Retrieves the neighborhood of a given node.
 
         Parameters
         ----------
@@ -80,8 +74,7 @@ class BaseCrawler(ABC):
         pass
 
     def crawl(self, start_node_id, max_depth=1):
-        """
-        Performs the crawling process using Breadth-First Search (BFS).
+        """Performs the crawling process using Breadth-First Search (BFS).
 
         Starting from a specified node, this method explores neighboring nodes up to a given depth, creating a
         subgraph of visited nodes.

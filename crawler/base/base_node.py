@@ -2,8 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class BaseNode(ABC):
-    """
-    Abstract base class for nodes in a graph.
+    """Abstract base class for nodes in a graph.
 
     This class provides a template for creating nodes within a graph. Each node is identified by a unique identifier
     and can have additional properties like depth and parent node for navigation or traversal purposes.
@@ -31,8 +30,7 @@ class BaseNode(ABC):
     """
 
     def __init__(self, node_id):
-        """
-        Initializes the BaseNode instance with the provided identifier.
+        """Initializes the BaseNode instance with the provided identifier.
 
         Parameters
         ----------
@@ -45,8 +43,7 @@ class BaseNode(ABC):
 
     @property
     def id(self):
-        """
-        The unique identifier of the node.
+        """The unique identifier of the node.
 
         Returns
         -------
@@ -57,17 +54,15 @@ class BaseNode(ABC):
 
     @abstractmethod
     def to_markdown(self):
-        """
-        Converts the node's content to Markdown format.
+        """Converts the node's content to Markdown format.
 
-        This method should be implemented by subclasses to specify how the node's information should be represented
-        in Markdown.
+        This method should be implemented by subclasses to specify how the node's information should
+        be represented in Markdown.
         """
         pass
 
     def __hash__(self):
-        """
-        Computes the hash of the node based on its unique identifier.
+        """Computes the hash of the node based on its unique identifier.
 
         Returns
         -------
@@ -77,8 +72,7 @@ class BaseNode(ABC):
         return hash(self.id)
 
     def __eq__(self, other):
-        """
-        Checks whether this node is equal to another node, based on their identifiers.
+        """Checks whether this node is equal to another node, based on their identifiers.
 
         Parameters
         ----------

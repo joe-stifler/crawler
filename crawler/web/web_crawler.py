@@ -4,8 +4,8 @@ from ..base.base_crawler import BaseCrawler
 
 
 class WebCrawler(BaseCrawler):
-    """
-    A web crawler for navigating and extracting information from the web, adhering to specified domain restrictions.
+    """A web crawler for navigating and extracting information from the web, adhering to specified
+    domain restrictions.
 
     This class extends BaseCrawler to specifically handle web pages by fetching and analyzing their hyperlinks. It supports
     starting new crawling sessions with options to restrict crawling to specific domains.
@@ -44,8 +44,7 @@ class WebCrawler(BaseCrawler):
     """
 
     def __init__(self, allowed_domains=[]):
-        """
-        Initializes the WebCrawler with specified domain restrictions.
+        """Initializes the WebCrawler with specified domain restrictions.
 
         Parameters
         ----------
@@ -57,8 +56,7 @@ class WebCrawler(BaseCrawler):
         self.session_allowed_domains = []
 
     def get_node(self, node_id):
-        """
-        Retrieves a WebNode instance corresponding to a given node identifier (URL).
+        """Retrieves a WebNode instance corresponding to a given node identifier (URL).
 
         Parameters
         ----------
@@ -73,8 +71,8 @@ class WebCrawler(BaseCrawler):
         return WebNode(node_id)
 
     def start_new_crawling_session(self, start_node_id, restrict_to_domain=True):
-        """
-        Initializes a new crawling session, with an option to restrict the session to the domain of the start node.
+        """Initializes a new crawling session, with an option to restrict the session to the domain
+        of the start node.
 
         Parameters
         ----------
@@ -98,8 +96,8 @@ class WebCrawler(BaseCrawler):
         return crawl_subgraph
 
     def in_allowed_domain(self, url):
-        """
-        Determines if the given URL is within the crawler's allowed domains for the current session.
+        """Determines if the given URL is within the crawler's allowed domains for the current
+        session.
 
         Parameters
         ----------
@@ -112,11 +110,13 @@ class WebCrawler(BaseCrawler):
             True if the URL is within the allowed domains, False otherwise.
         """
         all_allowed_domains = self.base_allowed_domains + self.session_allowed_domains
-        return len(all_allowed_domains) == 0 or any(domain in url for domain in all_allowed_domains)
+        return len(all_allowed_domains) == 0 or any(
+            domain in url for domain in all_allowed_domains
+        )
 
     def visit_node_neighborhood(self, node):
-        """
-        Fetches the web page corresponding to the given node, extracts links, and returns neighboring nodes within allowed domains.
+        """Fetches the web page corresponding to the given node, extracts links, and returns
+        neighboring nodes within allowed domains.
 
         Parameters
         ----------
@@ -130,6 +130,8 @@ class WebCrawler(BaseCrawler):
         """
         node_neighbors = node.fetch_connected_hyperlinks()
         allowed_neighbors = [
-            WebNode(neighbor) for neighbor in node_neighbors if self.in_allowed_domain(neighbor)
+            WebNode(neighbor)
+            for neighbor in node_neighbors
+            if self.in_allowed_domain(neighbor)
         ]
         return allowed_neighbors

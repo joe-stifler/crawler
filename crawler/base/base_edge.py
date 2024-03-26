@@ -2,8 +2,7 @@ from abc import ABC, abstractmethod
 
 
 class BaseEdge(ABC):
-    """
-    Abstract base class for edges in a graph.
+    """Abstract base class for edges in a graph.
 
     This class defines a template for creating edges in a graph structure. Each edge connects two nodes and can
     contain additional attributes to represent properties of the connection.
@@ -25,8 +24,7 @@ class BaseEdge(ABC):
 
     @abstractmethod
     def __init__(self, u, v, **attributes):
-        """
-        Initializes the BaseEdge instance with source, target, and additional attributes.
+        """Initializes the BaseEdge instance with source, target, and additional attributes.
 
         Parameters
         ----------

@@ -11,8 +11,7 @@ from ..utils.file_utils import (
 
 
 class BaseGraph:
-    """
-    A base class for managing and visualizing graphs using NetworkX and matplotlib.
+    """A base class for managing and visualizing graphs using NetworkX and matplotlib.
 
     This class encapsulates a directed graph and provides methods for node and edge manipulation,
     visualization, and exporting the graph data.
@@ -43,14 +42,11 @@ class BaseGraph:
     """
 
     def __init__(self):
-        """
-        Initializes a new instance of BaseGraph.
-        """
+        """Initializes a new instance of BaseGraph."""
         self.graph = nx.DiGraph()
 
     def add_node(self, node):
-        """
-        Adds a node to the graph.
+        """Adds a node to the graph.
 
         Parameters
         ----------
@@ -60,8 +56,7 @@ class BaseGraph:
         self.graph.add_node(node.id, node=node)
 
     def add_edge(self, u, v, **attributes):
-        """
-        Adds an edge between two nodes in the graph, with optional attributes.
+        """Adds an edge between two nodes in the graph, with optional attributes.
 
         Parameters
         ----------
@@ -77,8 +72,7 @@ class BaseGraph:
         self.graph.add_edge(u.id, v.id, **attributes)
 
     def get_node(self, node_id):
-        """
-        Retrieves a node from the graph by its identifier.
+        """Retrieves a node from the graph by its identifier.
 
         Parameters
         ----------
@@ -93,8 +87,7 @@ class BaseGraph:
         return self.graph.nodes[node_id]["node"]
 
     def all_nodes(self):
-        """
-        Returns a list of all nodes in the graph.
+        """Returns a list of all nodes in the graph.
 
         Returns
         -------
@@ -104,8 +97,7 @@ class BaseGraph:
         return [node["node"] for node in self.graph.nodes.values()]
 
     def __contains__(self, node):
-        """
-        Checks if a node is in the graph.
+        """Checks if a node is in the graph.
 
         Parameters
         ----------
@@ -120,10 +112,10 @@ class BaseGraph:
         return node.id in self.graph.nodes
 
     def visualize(self):
-        """
-        Visualizes the graph using matplotlib.
+        """Visualizes the graph using matplotlib.
 
-        This method generates a visual representation of the graph, displaying nodes, edges, and optionally labels.
+        This method generates a visual representation of the graph, displaying nodes, edges, and
+        optionally labels.
         """
         # Prepare node labels based on WebNode IDs
         node_labels = {node.id: f"{idx}" for idx, node in enumerate(self.all_nodes())}
@@ -146,7 +138,9 @@ class BaseGraph:
         )
 
         # Prepare and show the URL mapping on the right
-        textstr = "\n".join([f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())])
+        textstr = "\n".join(
+            [f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())]
+        )
         props = dict(boxstyle="round", facecolor="wheat", alpha=0.5)
 
         # Add a side subplot for URL mapping
@@ -165,8 +159,7 @@ class BaseGraph:
         plt.show()
 
     def to_markdown(self):
-        """
-        Converts all graph nodes to a markdown text dictionary.
+        """Converts all graph nodes to a markdown text dictionary.
 
         Returns
         -------
@@ -182,8 +175,8 @@ class BaseGraph:
         return url_text_dict
 
     def save_to_multiple_files(self, directory="output"):
-        """
-        Saves the graph nodes' markdown representations to multiple files in the specified directory.
+        """Saves the graph nodes' markdown representations to multiple files in the specified
+        directory.
 
         Parameters
         ----------
@@ -194,8 +187,7 @@ class BaseGraph:
         save_content_to_multiple_files(url_text_dict, directory)
 
     def save_to_single_file(self, directory="output", filename="combined_output.md"):
-        """
-        Combines the markdown representations of all graph nodes and saves them to a single file.
+        """Combines the markdown representations of all graph nodes and saves them to a single file.
 
         Parameters
         ----------
