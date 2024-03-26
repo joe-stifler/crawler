@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class BaseNode(ABC):
     """
     Abstract base class for nodes in a graph.

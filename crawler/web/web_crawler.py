@@ -2,6 +2,7 @@ from .web_node import WebNode
 from .web_graph import WebGraph
 from ..base.base_crawler import BaseCrawler
 
+
 class WebCrawler(BaseCrawler):
     """
     A web crawler for navigating and extracting information from the web, adhering to specified domain restrictions.
@@ -111,7 +112,9 @@ class WebCrawler(BaseCrawler):
             True if the URL is within the allowed domains, False otherwise.
         """
         all_allowed_domains = self.base_allowed_domains + self.session_allowed_domains
-        return len(all_allowed_domains) == 0 or any(domain in url for domain in all_allowed_domains)
+        return len(all_allowed_domains) == 0 or any(
+            domain in url for domain in all_allowed_domains
+        )
 
     def visit_node_neighborhood(self, node):
         """
@@ -128,5 +131,9 @@ class WebCrawler(BaseCrawler):
             A list of WebNode instances representing the allowable neighboring nodes linked from the given node.
         """
         node_neighbors = node.fetch_connected_hyperlinks()
-        allowed_neighbors = [WebNode(neighbor) for neighbor in node_neighbors if self.in_allowed_domain(neighbor)]
+        allowed_neighbors = [
+            WebNode(neighbor)
+            for neighbor in node_neighbors
+            if self.in_allowed_domain(neighbor)
+        ]
         return allowed_neighbors

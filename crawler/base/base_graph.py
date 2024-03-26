@@ -8,6 +8,7 @@ from ..utils.file_utils import (
     save_content_to_single_file,
 )
 
+
 class BaseGraph:
     """
     A base class for managing and visualizing graphs using NetworkX and matplotlib.
@@ -176,9 +177,9 @@ class BaseGraph:
         """
         url_text_dict = {}
         for node in self.all_nodes():
-            url_text_dict[
-                node.url
-            ] = node.to_markdown()  # Assuming each node has a 'to_markdown' method
+            url_text_dict[node.url] = (
+                node.to_markdown()
+            )  # Assuming each node has a 'to_markdown' method
         return url_text_dict
 
     def save_to_multiple_files(self, directory="output"):

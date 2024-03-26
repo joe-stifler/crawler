@@ -56,6 +56,7 @@ class WebNode(BaseNode):
     >>> markdown_content = node.to_markdown()
     >>> print(markdown_content[:100])  # Print the first 100 characters of the Markdown content
     """
+
     def __init__(self, url, **attributes):
         """
         Initializes a WebNode instance representing a web page.
@@ -154,7 +155,9 @@ class WebNode(BaseNode):
             return ""
 
         h = html2text.HTML2Text()
-        h.ignore_links = True  # Optionally, links can be included by setting this to False
+        h.ignore_links = (
+            True  # Optionally, links can be included by setting this to False
+        )
         return h.handle(self.soup.prettify())
 
     @property

@@ -1,6 +1,7 @@
 import os
 import re
 
+
 def generate_filename_from_url(url):
     """
     Generates a filesystem-safe filename from a URL.
@@ -30,6 +31,7 @@ def generate_filename_from_url(url):
     safe_filename += ".md"
     return safe_filename
 
+
 def save_content_to_multiple_files(url_text_dict, directory="output"):
     """
     Saves content of each URL to its own Markdown file within the specified directory.
@@ -47,7 +49,7 @@ def save_content_to_multiple_files(url_text_dict, directory="output"):
     # Ensure target directory exists
     if not os.path.exists(directory):
         os.makedirs(directory)
-    
+
     # Write each URL's content to a separate file
     for url, markdown_text in url_text_dict.items():
         filename = generate_filename_from_url(url)
@@ -55,6 +57,7 @@ def save_content_to_multiple_files(url_text_dict, directory="output"):
         content = header + markdown_text
         with open(os.path.join(directory, filename), "w", encoding="utf-8") as file:
             file.write(content)
+
 
 def save_content_to_single_file(
     url_text_dict, directory="output", filename="combined_output.md"
@@ -77,13 +80,13 @@ def save_content_to_single_file(
     # Ensure target directory exists
     if not os.path.exists(directory):
         os.makedirs(directory)
-    
+
     # Combine all content into a single string
     combined_content = ""
     for url, markdown_text in url_text_dict.items():
         header = f"# Source URL: {url}\n\n"
         combined_content += header + markdown_text + "\n\n---\n\n"
-    
+
     # Write combined content to the specified file
     with open(os.path.join(directory, filename), "w", encoding="utf-8") as file:
         file.write(combined_content)

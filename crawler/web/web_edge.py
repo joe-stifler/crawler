@@ -1,5 +1,6 @@
 from ..base.base_node import BaseEdge
 
+
 class WebEdge(BaseEdge):
     """
     Represents a hyperlink (edge) between two web page nodes (u and v) in the crawl graph.
@@ -34,6 +35,7 @@ class WebEdge(BaseEdge):
     >>> edge.attributes['title']
     'Example Link'
     """
+
     def __init__(self, u, v, **attributes):
         """
         Initializes a `WebEdge` instance representing a hyperlink between two web page nodes.
