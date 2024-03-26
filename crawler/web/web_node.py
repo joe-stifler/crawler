@@ -5,6 +5,7 @@ from urllib.parse import urljoin, urlparse
 
 from ..base.base_node import BaseNode
 
+
 class WebNode(BaseNode):
     """Represents a web page node in the crawl graph, with lazily fetched HTML content."""
 
@@ -47,7 +48,7 @@ class WebNode(BaseNode):
     def fetch_connected_hyperlinks(self):
         """
         Fetches all hyperlinks from the HTML content of the web page.
-        
+
         Returns:
             List: The list of hyperlinks found in the HTML content.
         """
@@ -82,7 +83,7 @@ class WebNode(BaseNode):
     @property
     def url(self):
         return self.id
-    
+
     @property
     def domain(self):
         """
@@ -101,9 +102,7 @@ class WebNode(BaseNode):
         return f"WebNode(id={self.id})"
 
     def __repr__(self):
-        return (
-            f"WebNode(id={self.id})"
-        )
+        return f"WebNode(id={self.id})"
 
     def _repr_html_(self, index=None):
         index_part = f"<strong>Index:</strong> {index}<br>" if index is not None else ""
@@ -121,5 +120,7 @@ class WebNode(BaseNode):
         """
         Converts the node's content to Markdown format.
         """
-        markdown_text = self.convert_to_markdown()  # Assuming this method returns Markdown formatted text
+        markdown_text = (
+            self.convert_to_markdown()
+        )  # Assuming this method returns Markdown formatted text
         return markdown_text

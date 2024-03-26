@@ -1,6 +1,7 @@
 import os
 import re
 
+
 def generate_filename_from_url(url):
     """
     Generates a safe filename from a URL.
@@ -12,6 +13,7 @@ def generate_filename_from_url(url):
         safe_filename = safe_filename[:max_length]
     safe_filename += ".md"
     return safe_filename
+
 
 def save_content_to_multiple_files(url_text_dict, directory="output"):
     """
@@ -27,7 +29,10 @@ def save_content_to_multiple_files(url_text_dict, directory="output"):
         with open(os.path.join(directory, filename), "w", encoding="utf-8") as file:
             file.write(content)
 
-def save_content_to_single_file(url_text_dict, directory="output", filename="combined_output.md"):
+
+def save_content_to_single_file(
+    url_text_dict, directory="output", filename="combined_output.md"
+):
     """
     Saves content of all URLs into a single Markdown file.
     """

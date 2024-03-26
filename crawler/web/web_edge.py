@@ -1,5 +1,6 @@
 from ..base.base_node import BaseEdge
 
+
 class WebEdge(BaseEdge):
     """Represents a link between web pages in the crawl graph."""
 

@@ -1,6 +1,7 @@
 from collections import deque
 from abc import ABC, abstractmethod
 
+
 class BaseCrawler(ABC):
     """
     Abstract base class for crawl graphs that define methods for crawling operations.
@@ -21,15 +22,15 @@ class BaseCrawler(ABC):
             BaseNode: The node object.
         """
         pass
-    
+
     @abstractmethod
     def start_new_crawling_session(self, start_node_id):
         """
         Starts a new crawling session.
-        
+
         Args:
             start_node_id (str): The root node id to start crawling from.
-            
+
         Returns:
             BaseGraph: The graph object.
         """
@@ -75,8 +76,6 @@ class BaseCrawler(ABC):
                     crawl_subgraph.add_node(child_node)
                     visiting_nodes.append((child_node, new_depth))
 
-                crawl_subgraph.add_edge(
-                    current_node, child_node, depth=new_depth
-                )
-        
+                crawl_subgraph.add_edge(current_node, child_node, depth=new_depth)
+
         return crawl_subgraph

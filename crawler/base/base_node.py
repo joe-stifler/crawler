@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 
+
 class BaseNode(ABC):
     """
     Abstract base class for nodes in a graph.
@@ -16,7 +17,7 @@ class BaseNode(ABC):
         self._node_id = node_id
         self.depth = 0
         self.parent = None
-    
+
     @property
     def id(self):
         """
@@ -26,7 +27,7 @@ class BaseNode(ABC):
             Any: The identifier of the node.
         """
         return self._node_id
-    
+
     @abstractmethod
     def to_markdown(self):
         """Converts the node's content to Markdown format."""

@@ -2,7 +2,11 @@ import os
 import networkx as nx
 import matplotlib.pyplot as plt
 
-from ..utils.file_utils import save_content_to_multiple_files, save_content_to_single_file
+from ..utils.file_utils import (
+    save_content_to_multiple_files,
+    save_content_to_single_file,
+)
+
 
 class BaseGraph:
     def __init__(self):
@@ -18,7 +22,7 @@ class BaseGraph:
 
     def get_node(self, node_id):
         return self.graph.nodes[node_id]["node"]
-    
+
     def all_nodes(self):
         # return self.graph.nodes.values()
         return [node["node"] for node in self.graph.nodes.values()]
@@ -31,7 +35,7 @@ class BaseGraph:
         Visualizes the graph using matplotlib.
         """
         # Prepare node labels based on WebNode IDs
-        node_labels = {node.id: f'{idx}' for idx, node in enumerate(self.all_nodes())}
+        node_labels = {node.id: f"{idx}" for idx, node in enumerate(self.all_nodes())}
 
         # Set up the figure layout
         fig, ax = plt.subplots(figsize=(15, 8))
@@ -40,16 +44,34 @@ class BaseGraph:
 
         # Draw the graph
         pos = nx.spring_layout(self.graph)  # positions for all nodes
-        nx.draw(self.graph, pos, with_labels=True, labels=node_labels, node_size=50, font_size=8, ax=ax_graph)
+        nx.draw(
+            self.graph,
+            pos,
+            with_labels=True,
+            labels=node_labels,
+            node_size=50,
+            font_size=8,
+            ax=ax_graph,
+        )
 
         # Prepare and show the URL mapping on the right
-        textstr = "\n".join([f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())])
+        textstr = "\n".join(
+            [f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())]
+        )
         props = dict(boxstyle="round", facecolor="wheat", alpha=0.5)
 
         # Add a side subplot for URL mapping
         ax_mapping = plt.subplot(122)
         plt.axis("off")
-        ax_mapping.text(0.05, 0.95, textstr, transform=ax_mapping.transAxes, fontsize=8, verticalalignment="top", bbox=props)
+        ax_mapping.text(
+            0.05,
+            0.95,
+            textstr,
+            transform=ax_mapping.transAxes,
+            fontsize=8,
+            verticalalignment="top",
+            bbox=props,
+        )
 
         plt.show()
 
@@ -57,7 +79,9 @@ class BaseGraph:
         """Converts all graph nodes to a markdown text dictionary."""
         url_text_dict = {}
         for node in self.all_nodes():
-            url_text_dict[node.url] = node.to_markdown()  # Assuming each node has a 'to_markdown' method
+            url_text_dict[
+                node.url
+            ] = node.to_markdown()  # Assuming each node has a 'to_markdown' method
         return url_text_dict
 
     def save_to_multiple_files(self, directory="output"):
