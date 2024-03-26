@@ -55,7 +55,7 @@ jobs:
     - name: Run Pytest
       run: |
         # Note: `pytest.ini` is used to enable specific pytest packages.
-        coverage run --branch --source=pietstormai -m pytest
+        coverage run --branch --source=crawler -m pytest
         coverage xml
 
     - name: Upload Coverage Report
