@@ -1,4 +1,4 @@
-from crawl.web.web_crawler import WebCrawler
+from crawler.web.web_crawler import WebCrawler
 from crawler.web.web_node import WebNode
 from crawler.web.web_graph import WebGraph
 from bs4 import BeautifulSoup
