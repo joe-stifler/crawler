@@ -6,7 +6,7 @@ import tempfile
 start_path = "."  # Use '.' for current directory or specify your own path
 
 # Define the pattern to match .h and .cpp files
-patterns = ["*.h", "*.cpp"]
+patterns = ["*.py"]
 
 # Define the output file where the content will be aggregated
 output_file = "all_headers_and_cpp_files_content_from_this_repository_in_one_file.txt"
