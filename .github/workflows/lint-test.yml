@@ -1,0 +1,65 @@
+name: Lint and Test
+
+on:
+  workflow_call:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-lint:
+    name: Lint Python Code
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Lint Code
+      run: |
+        flake8 .
+
+    # TODO: disabling for now
+    # - name: Lint Docs
+    #   run: |
+    #     pydocstyle --convention=numpy .
+
+  python-unit-tests:
+    name: Run Unit Python Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Install Dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -e .
+        pip install -r requirements.txt
+
+    - name: Run Pytest
+      run: |
+        # Note: `pytest.ini` is used to enable specific pytest packages.
+        coverage run --branch --source=crawler -m pytest
+        coverage xml
+
+    - name: Upload Coverage Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: coverage.xml

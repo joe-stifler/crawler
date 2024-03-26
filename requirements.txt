@@ -1,0 +1,10 @@
+jupyter
+ipykernel
+matplotlib
+numpy
+networkx
+html2text
+pytest===7.4.3
+coverage===7.4.4
+flake8
+black[jupyter]
