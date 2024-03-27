@@ -130,6 +130,13 @@ class WebNode(BaseNode):
         urls = set()
         for link in self.soup.find_all("a"):
             href = link.get("href")
+
+            if href is None:
+                continue
+
+            if ".html" in href:
+                href = href.split(".html")[0] + ".html"
+
             if href and not href.startswith("#"):
                 full_url = urljoin(self.url, href)
                 urls.add(full_url)
@@ -156,7 +163,9 @@ class WebNode(BaseNode):
             return ""
 
         h = html2text.HTML2Text()
-        h.ignore_links = True  # Optionally, links can be included by setting this to False
+        h.ignore_links = (
+            True  # Optionally, links can be included by setting this to False
+        )
         return h.handle(self.soup.prettify())
 
     @property
