@@ -1,3 +1,4 @@
+import logging
 import requests
 import html2text
 from bs4 import BeautifulSoup
@@ -86,10 +87,13 @@ class WebNode(BaseNode):
             response = requests.get(self.url, timeout=5)
             if response.status_code == 200:
                 self._soup = BeautifulSoup(response.text, "html.parser")
+                logging.info("Fetched and parsed %s webpage urls", str(self.url))
             else:
-                print(f"Failed to access {self.url}: {response.status_code}")
+                logging.warning(
+                    "Failed to access %s: %s", str(self.url), str(response.status_code)
+                )
         except requests.RequestException as e:
-            print(f"Failed to access {self.url}: {e}")
+            logging.warning("Failed to access %s: %s", str(self.url), str(e))
             self._soup = BeautifulSoup("", "html.parser")
         finally:
             self._content_fetched = True
@@ -131,6 +135,9 @@ class WebNode(BaseNode):
                 urls.add(full_url)
         urls = list(urls)
         urls.sort()
+
+        for idx, url in enumerate(urls):
+            logging.debug("\tConnected hyperlink %d: %s", idx, str(url))
 
         return urls
 
