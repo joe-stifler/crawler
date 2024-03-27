@@ -63,7 +63,9 @@ class WebGraph(BaseGraph):
         """
         nodes_str = ",\n".join(
             f"\tURL {index}= {node.url}, DEPTH = {node.depth}"
-            for index, node in enumerate(sorted(self.graph.nodes, key=lambda x: x.depth))
+            for index, node in enumerate(
+                sorted(self.all_nodes(), key=lambda x: x.depth)
+            )
         )
         return f"NodeInfoSet(\n{nodes_str}\n)"
 
