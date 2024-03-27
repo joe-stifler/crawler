@@ -107,6 +107,8 @@ class BaseCrawler(ABC):
 
             for child_node in self.visit_node_neighborhood(current_node):
                 if child_node not in crawl_subgraph:
+                    child_node.depth = new_depth
+                    child_node.parent = current_node
                     crawl_subgraph.add_node(child_node)
                     visiting_nodes.append((child_node, new_depth))
 
