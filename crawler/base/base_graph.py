@@ -137,7 +137,9 @@ class BaseGraph:
         )
 
         # Prepare and show the URL mapping on the right
-        textstr = "\n".join([f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())])
+        textstr = "\n".join(
+            [f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())]
+        )
         props = dict(boxstyle="round", facecolor="wheat", alpha=0.5)
 
         # Add a side subplot for URL mapping

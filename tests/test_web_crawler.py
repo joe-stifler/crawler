@@ -9,7 +9,9 @@ from pytest import fixture
 # Fixtures for reusable objects
 @fixture(scope="module")
 def crawler():
-    return WebCrawler(allowed_domains=["example.com"])  # Adjust allowed_domains as needed
+    return WebCrawler(
+        allowed_domains=["example.com"]
+    )  # Adjust allowed_domains as needed
 
 
 @fixture

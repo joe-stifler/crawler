@@ -38,8 +38,8 @@ class BaseNode(ABC):
             The unique identifier of the node.
         """
         self._node_id = node_id
-        self.depth = 0
-        self.parent = None
+        self._depth = 0
+        self._parent = None
 
     @property
     def id(self):
@@ -51,6 +51,50 @@ class BaseNode(ABC):
             The identifier of the node.
         """
         return self._node_id
+
+    @property
+    def depth(self):
+        """The depth of the node within the graph.
+
+        Returns
+        -------
+        int
+            The depth of the node.
+        """
+        return self._depth
+
+    @depth.setter
+    def depth(self, value):
+        """Sets the depth of the node.
+
+        Parameters
+        ----------
+        value : int
+            The new depth of the node.
+        """
+        self._depth = value
+
+    @property
+    def parent(self):
+        """The parent node of this node.
+
+        Returns
+        -------
+        BaseNode or None
+            The parent node, or None if this node has no parent.
+        """
+        return self._parent
+
+    @parent.setter
+    def parent(self, value):
+        """Sets the parent node.
+
+        Parameters
+        ----------
+        value : BaseNode or None
+            The new parent node, or None if this node should not have a parent.
+        """
+        self._parent = value
 
     @abstractmethod
     def to_markdown(self):

@@ -1,3 +1,4 @@
+import logging
 import requests
 import html2text
 from bs4 import BeautifulSoup
@@ -86,10 +87,13 @@ class WebNode(BaseNode):
             response = requests.get(self.url, timeout=5)
             if response.status_code == 200:
                 self._soup = BeautifulSoup(response.text, "html.parser")
+                logging.info("Fetched and parsed %s webpage urls", str(self.url))
             else:
-                print(f"Failed to access {self.url}: {response.status_code}")
+                logging.warning(
+                    "Failed to access %s: %s", str(self.url), str(response.status_code)
+                )
         except requests.RequestException as e:
-            print(f"Failed to access {self.url}: {e}")
+            logging.warning("Failed to access %s: %s", str(self.url), str(e))
             self._soup = BeautifulSoup("", "html.parser")
         finally:
             self._content_fetched = True
@@ -126,11 +130,21 @@ class WebNode(BaseNode):
         urls = set()
         for link in self.soup.find_all("a"):
             href = link.get("href")
+
+            if href is None:
+                continue
+
+            if ".html" in href:
+                href = href.split(".html")[0] + ".html"
+
             if href and not href.startswith("#"):
                 full_url = urljoin(self.url, href)
                 urls.add(full_url)
         urls = list(urls)
         urls.sort()
+
+        for idx, url in enumerate(urls):
+            logging.debug("\tConnected hyperlink %d: %s", idx, str(url))
 
         return urls
 
@@ -149,7 +163,9 @@ class WebNode(BaseNode):
             return ""
 
         h = html2text.HTML2Text()
-        h.ignore_links = True  # Optionally, links can be included by setting this to False
+        h.ignore_links = (
+            True  # Optionally, links can be included by setting this to False
+        )
         return h.handle(self.soup.prettify())
 
     @property
