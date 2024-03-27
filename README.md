@@ -1,62 +1,108 @@
-## Crawler: A Simple Web Crawler for Generating Markdown
+**Crawler: A Simple Web Crawler to Convert HTML Content into Markdown**
 
-Crawler is a Python package that allows you to crawl web pages and convert their content into Markdown format. This can be useful for creating documentation, notes, or other text-based representations of web content.
+Crawler is a Python package designed to crawl web pages and convert their content into Markdown format. This tool is ideal for creating documentation, notes, or other text-based representations of web content.
 
-### Features
+### Motivation
 
-- **Crawls web pages:** Starting from a given URL, Crawler navigates through hyperlinks and extracts content from web pages.
-- **Converts HTML to Markdown:** The extracted content is converted to Markdown format, making it easy to read and edit.
-- **Supports domain restrictions:** You can specify allowed domains to limit the crawler's scope and avoid unwanted content.
-- **Saves content to multiple or single files:** You can choose to save each crawled page as a separate Markdown file or combine them into a single file.
-- **Visualizes the crawl graph:** Crawler provides a visualization of the crawled web pages and their connections, giving you an overview of the explored structure.
+While there are existing Python libraries for web crawling and Markdown conversion, this project was born out of a desire to:
 
-### Installation
+1. **Learn and Experiment:** This project was an opportunity to learn new technologies and explore different approaches to crawling and content conversion.
+2. **Sharpen Python Skills:** It provided a chance to practice and improve Python programming skills, with a focus on object-oriented design and design patterns.
+3. **Facilitate LLM Interactions:** With the rise of large language models (LLMs), the need to gather information from various sources (internet, file systems, databases) became apparent. This tool was created to streamline the process of extracting and combining content into a format suitable for LLM context.
+4. **Future Expansion:** The project's roadmap includes expanding functionality to handle not only URLs but also local file paths and even GitHub repositories, enabling the extraction and combination of code files for LLM context.
 
-To install Crawler, use the following command:
+### **Features**
 
-`pip install -e .`
+- **Crawls web pages:** Starts from a given URL and navigates through hyperlinks to extract content.
+- **Converts HTML to Markdown:** Transforms extracted web content into Markdown for ease of reading and editing.
+- **Domain restrictions:** Limits crawling scope to specified domains to avoid crawling unwanted content.
+- **Flexible output options:** Content can be saved as individual Markdown files or combined into a single file.
+- **Graph visualization:** Offers a visual representation of the crawl, illustrating the structure explored.
 
+### **Installation**
 
-### Usage
+Install Crawler with pip:
 
-To use Crawler, follow these steps:
+```
+pip install -e .
 
-1. **Specify the starting URL and output folder:**
-    - Run the crawler command with the starting URL and the desired output folder as arguments. For example:
+```
+
+### **Usage**
+
+Crawler is command-line friendly. Here's how to get started:
+
+1. **Launch a crawl:**
+Use the command **`crawler`** followed by the required flags and options. For instance:
     
-    `crawler https://example.com output/`
+    ```
+    crawler -u https://example.com -o output/
+    ```
+    
+2. **Command-line arguments:**
+    - **`u, --url`**: (Required) The starting URL for the crawl.
+    - **`o, --output_folder`**: (Required) Destination folder for Markdown files.
+    - **`c, --combine`**: Combine all crawled pages into a single Markdown file.
+    - **`md, --max_depth`**: Set the maximum crawl depth (default is 1).
+    - **`ad, --allowed_domains`**: Specify domains the crawler can access.
+    - **`v, --verbose`**: Set verbosity level (**`info`** by default).
+    - **`vis, --visualize`**: Enable post-crawl visualization of the graph.
 
-2. **Optional arguments:**
-    - Use the `--merge` flag to combine all crawled pages into a single Markdown file.
-    - Use the `--max_depth` option to specify the maximum depth to crawl from the starting URL. The default depth is 1.
+### **Example**
 
-### Example
+Crawl a website and save each page as a Markdown file in the specified **`output/`** folder:
 
-Here's an example of how to use Crawler to crawl a website and save the content to multiple Markdown files:
+```
+crawler -u https://www.example.com -o output/
+```
 
-`crawler https://www.example.com/ output/`
+### **Visualization**
 
-This command will crawl the website starting from https://www.example.com/ and save the content of each page as a separate Markdown file in the output/ directory.
+To visualize the crawl graph:
 
-### Visualization
+```python
+from crawler.web.web_graph import WebGraph
 
-Crawler can also visualize the crawl graph, showing the connections between crawled pages. To do this, run the following command after crawling:
+web_crawler = WebCrawler(allowed_domains=["example.com"])
+crawl_subgraph = web_crawler.crawl(
+    "https://www.example.com", max_depth=1
+)
+crawl_subgraph.visualize()
+```
 
-`from crawler.web.web_graph import WebGraph
+This displays the structure of the crawled web pages and their links.
 
-# Assuming 'crawl_subgraph' is the result of the crawl
-crawl_subgraph.visualize()`
+### **Roadmap**
 
-This will display a visualization of the crawled web pages and their connections.
+### Crawling Enhancements:
 
-### Contributing
+- **Parallel crawling for efficiency:** Implement parallel crawling techniques to significantly speed up the crawling process, especially for large websites or complex directory structures.
+- **File system crawling:** Extend crawling capabilities beyond web pages to include local file systems, allowing users to extract content from files within specified directories.
+- **GitHub repository crawling:** Enable the crawling of GitHub repositories to extract code from specific file types (e.g., .py, .cpp, .h) and combine them for use as context in large language models (LLMs).
+- **Support crawling for specific file patterns:** Allow users to define specific file patterns or extensions to target during the crawl, providing more granular control over the content extraction process.
 
-Contributions to Crawler are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file for more information.
+### Caching and Storage:
 
-### License
+- **Caching with expiration:** Implement a caching mechanism to store crawled web pages or files locally, reducing redundant requests and improving performance for repeated crawls. Set expiration times for cached content to ensure freshness.
+- **Database support for cache:** Explore storing cached content in a database for more efficient retrieval and management, potentially enabling access to cached pages outside the Crawler program itself.
 
-Crawler is licensed under the MIT License. See the LICENSE file for more information.
+### Output and Customization:
 
-## AI Involvement in Content Generation
+- **Support for additional output formats:** Expand output options beyond Markdown to include other formats such as HTML, PDF, or plain text, providing flexibility for different use cases.
+- **Custom parsing rules:** Allow users to define custom parsing rules to handle websites with unique structures or content formats, ensuring accurate and tailored content extraction.
 
-This repository utilizes artificial intelligence (AI) to assist in the content generation process.
+### Visualization:
+
+- **Enhanced graph visualization:** Improve the visualization of the crawl graph with more interactive features, such as filtering, zooming, and highlighting specific nodes or connections, to provide a clearer and more insightful overview of the crawled structure.
+
+### **Contributing**
+
+Your contributions are welcome! Please refer to [CONTRIBUTING.md](https://chat.openai.com/c/CONTRIBUTING.md) for guidelines.
+
+### **License**
+
+Crawler is released under the MIT License. See the [LICENSE](https://chat.openai.com/c/LICENSE) file for more details.
+
+### **AI Involvement in Content Generation**
+
+This project leverages AI to assist in generating content.
