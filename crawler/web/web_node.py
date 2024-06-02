@@ -20,8 +20,6 @@ class WebNode(BaseNode):
 
     Attributes
     ----------
-    _soup : BeautifulSoup or None
-        A BeautifulSoup object representing the parsed HTML of the page. None until the content is fetched and parsed.
     _content_fetched : bool
         Indicates whether the HTML content has been fetched and parsed.
 
@@ -68,35 +66,28 @@ class WebNode(BaseNode):
             Additional attributes for the web node, such as 'depth' in the crawl graph, passed as keyword arguments.
         """
         super().__init__(url, **attributes)
-        self._soup = None
         self._content_fetched = False
+        self.cache = {}  # Add a cache dictionary to the WebNode
 
     def _fetch_and_parse_html(self):
-        """Lazily fetches the HTML content of the node's URL and parses it using BeautifulSoup.
-
-        This method is intended to be called internally and ensures that the web page content is fetched and parsed
-        only once, when first accessed. If the fetch operation is successful, the content is stored in a BeautifulSoup
-        object for further processing. If the fetch fails, it prints an error message and stores an empty BeautifulSoup
-        object.
-
-        Returns
-        -------
-        None
-        """
-        try:
-            response = requests.get(self.url, timeout=5)
-            if response.status_code == 200:
-                self._soup = BeautifulSoup(response.text, "html.parser")
-                logging.info("Fetched and parsed %s webpage urls", str(self.url))
-            else:
-                logging.warning(
-                    "Failed to access %s: %s", str(self.url), str(response.status_code)
-                )
-        except requests.RequestException as e:
-            logging.warning("Failed to access %s: %s", str(self.url), str(e))
-            self._soup = BeautifulSoup("", "html.parser")
-        finally:
-            self._content_fetched = True
+        if self.url not in self.cache:  # Check if the URL is in the cache
+            try:
+                response = requests.get(self.url, timeout=5)
+                if response.status_code == 200:
+                    self.cache[self.url] = BeautifulSoup(response.text, "html.parser")  # Store in cache
+                    logging.info("Fetched and parsed %s webpage urls", str(self.url))
+                else:
+                    logging.warning(
+                        "Failed to access %s: %s", str(self.url), str(response.status_code)
+                    )
+                    self.cache[self.url] = BeautifulSoup("", "html.parser")  # Store empty in cache
+            except requests.RequestException as e:
+                logging.warning("Failed to access %s: %s", str(self.url), str(e))
+                self.cache[self.url] = BeautifulSoup("", "html.parser")  # Store empty in cache
+            finally:
+                self._content_fetched = True
+        else:
+            logging.info("Retrieved %s from cache", str(self.url))
 
     @property
     def soup(self):
@@ -112,7 +103,7 @@ class WebNode(BaseNode):
         """
         if not self._content_fetched:
             self._fetch_and_parse_html()
-        return self._soup
+        return self.cache[self.url]
 
     def fetch_connected_hyperlinks(self):
         """Extracts and returns all hyperlinks found within the web page's HTML content. It parses

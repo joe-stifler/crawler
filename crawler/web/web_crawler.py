@@ -135,3 +135,27 @@ class WebCrawler(BaseCrawler):
             if self.in_allowed_domain(neighbor)
         ]
         return allowed_neighbors
+
+    def crawl_multiple_urls(self, urls, max_depth=1):
+        """Performs a crawl starting from multiple URLs, building a single graph.
+
+        This method iteratively crawls each URL in the provided list, adding the resulting subgraphs to a
+        single `WebGraph` instance.
+
+        Parameters
+        ----------
+        urls : list of str
+            A list of URLs to start crawling from.
+        max_depth : int, optional
+            The maximum depth to crawl from each starting URL. Defaults to 1.
+
+        Returns
+        -------
+        WebGraph
+            The combined `WebGraph` containing all nodes and edges explored from the provided URLs.
+        """
+        crawl_subgraph = WebGraph()
+        for url in urls:
+            subgraph = self.crawl(url, max_depth=max_depth)
+            crawl_subgraph.graph.update(subgraph.graph)  # Merge subgraphs
+        return crawl_subgraph
