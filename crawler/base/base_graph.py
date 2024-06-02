@@ -124,21 +124,46 @@ class BaseGraph:
         plt.subplots_adjust(left=0.1, right=0.75)
         ax_graph = plt.subplot(121)
 
-        # Draw the graph
-        pos = nx.spring_layout(self.graph)  # positions for all nodes
-        nx.draw(
+        # Choose a layout algorithm (e.g., Kamada-Kawai for better aesthetics)
+        pos = nx.kamada_kawai_layout(self.graph)  # positions for all nodes
+
+        # Draw the graph with customization
+        nx.draw_networkx_nodes(
             self.graph,
             pos,
-            with_labels=True,
-            labels=node_labels,
-            node_size=50,
-            font_size=8,
+            node_size=500,  # Larger nodes
+            node_color="lightblue",  # Light blue nodes
+            node_shape="o",  # Circular nodes
+            alpha=0.8,  # Slightly transparent
+            linewidths=2,  # Thicker borders
+            edgecolors="black",  # Black borders
+            ax=ax_graph,
+        )
+
+        nx.draw_networkx_edges(
+            self.graph,
+            pos,
+            width=2,  # Thicker edges
+            edge_color="gray",  # Gray edges
+            style="solid",  # Solid lines
+            alpha=0.7,  # Slightly transparent
+            connectionstyle="arc3,rad=0.2",  # Curved edges
+            ax=ax_graph,
+        )
+
+        nx.draw_networkx_labels(
+            self.graph,
+            pos,
+            font_size=10,  # Larger font size
+            font_color="black",  # Black font
+            font_weight="bold",  # Bold font
+            labels=node_labels,  # Use node_labels dictionary
             ax=ax_graph,
         )
 
         # Prepare and show the URL mapping on the right
         textstr = "\n".join(
-            [f"{idx}: {node.id}" for idx, node in enumerate(self.all_nodes())]
+            [f"{idx}: {node.id} ({node.url})" for idx, node in enumerate(self.all_nodes())]
         )
         props = dict(boxstyle="round", facecolor="wheat", alpha=0.5)
 
