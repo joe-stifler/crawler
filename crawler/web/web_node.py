@@ -80,6 +80,7 @@ class WebNode(BaseNode):
                     logging.warning(
                         "Failed to access %s: %s", str(self.url), str(response.status_code)
                     )
+                    self.cache[self.url] = BeautifulSoup("", "html.parser")  # Store empty in cache
             except requests.RequestException as e:
                 logging.warning("Failed to access %s: %s", str(self.url), str(e))
                 self.cache[self.url] = BeautifulSoup("", "html.parser")  # Store empty in cache

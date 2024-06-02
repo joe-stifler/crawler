@@ -53,7 +53,7 @@ def test_in_allowed_domain(crawler):
 
 def test_visit_node_neighborhood(crawler, web_node):
     # Mock or provide actual HTML content for testing
-    web_node._soup = BeautifulSoup(
+    web_node.cache[web_node.url] = BeautifulSoup(
         """<a href="/link1">Link 1</a> <a href="https://otherdomain.com/link2">Link 2</a>""",
         "html.parser",
     )
@@ -65,13 +65,13 @@ def test_visit_node_neighborhood(crawler, web_node):
 # Test WebNode methods
 def test_web_node_soup(web_node):
     # Mock or provide actual HTML content for testing
-    web_node._soup = BeautifulSoup("<h1>Example Page</h1>", "html.parser")
+    web_node.cache[web_node.url] = BeautifulSoup("<h1>Example Page</h1>", "html.parser")
     assert web_node.soup.find("h1").text == "Example Page"
 
 
 def test_fetch_connected_hyperlinks(web_node):
     # Mock or provide actual HTML content for testing
-    web_node._soup = BeautifulSoup(
+    web_node.cache[web_node.url] = BeautifulSoup(
         """<a href="/link1">Link 1</a> <a href="/link2">Link 2</a>""",
         "html.parser",
     )
@@ -81,7 +81,7 @@ def test_fetch_connected_hyperlinks(web_node):
 
 def test_convert_to_markdown(web_node):
     # Mock or provide actual HTML content for testing
-    web_node._soup = BeautifulSoup("<h1>Example Page</h1>", "html.parser")
+    web_node.cache[web_node.url] = BeautifulSoup("<h1>Example Page</h1>", "html.parser")
     markdown = web_node.convert_to_markdown()
     assert markdown.startswith("#  Example Page")
 
